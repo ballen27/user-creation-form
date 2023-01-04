@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/user-creation-form/static/css/main.0980307d.css",
-    "main.js": "/user-creation-form/static/js/main.717bf658.js",
+    "main.css": "/user-creation-form/static/css/main.5a2009ed.css",
+    "main.js": "/user-creation-form/static/js/main.04b9dab5.js",
     "index.html": "/user-creation-form/index.html",
-    "main.0980307d.css.map": "/user-creation-form/static/css/main.0980307d.css.map",
-    "main.717bf658.js.map": "/user-creation-form/static/js/main.717bf658.js.map"
+    "main.5a2009ed.css.map": "/user-creation-form/static/css/main.5a2009ed.css.map",
+    "main.04b9dab5.js.map": "/user-creation-form/static/js/main.04b9dab5.js.map"
   },
   "entrypoints": [
-    "static/css/main.0980307d.css",
-    "static/js/main.717bf658.js"
+    "static/css/main.5a2009ed.css",
+    "static/js/main.04b9dab5.js"
   ]
 }
