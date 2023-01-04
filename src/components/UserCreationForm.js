@@ -29,6 +29,7 @@ function UserCreationForm() {
         state: data.states[0].name
       });
     })
+    .catch(error => setError(error))
   },[])
 
   const handleChange = (event) => {
@@ -62,15 +63,7 @@ function UserCreationForm() {
   };
 
   const validateForm = () => {
-    let isValid = true;
-
-    if (!formData.name) isValid = false;
-    if (!formData.email) isValid = false;
-    if (!formData.password) isValid = false;
-    if (!formData.occupation) isValid = false;
-    if (!formData.state) isValid = false;
-    
-    return isValid
+    return formData.name && formData.email && formData.password && formData.occupation && formData.state;
   };
 
   return (
@@ -172,3 +165,11 @@ function UserCreationForm() {
 }
 
 export default UserCreationForm;
+
+
+/* Some Notes: 
+* 
+* Instead of the using the formIsValid value to display a message I could add the required attribute to each input
+* Better error handling on the fetch call with messages for the two api requests
+* Could include form input validation to check for valid email, pass first + last name etc.
+*/
