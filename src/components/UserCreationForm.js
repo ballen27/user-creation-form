@@ -3,31 +3,32 @@ import '../styles/form.css'
 
 function UserCreationForm() {
 
-  const [dogImage, setDogImage] = useState(null)
-  const [error, setError] = useState(null);
-  // const [occupationList, setOccupationList] = useState(['tech'])
-  // const [stateList, setStateList] = useState(['ca'])
-
-    // 3. Create out useEffect function
-  useEffect(() => {
-    const fetchData = () => {
-      // https://frontend-take-home.fetchrewards.com/form
-      return fetch("https://dog.ceo/api/breeds/image/random")
-      .then(response => response.json())
-      .then(data => setDogImage(data.message))
-    }
-    fetchData()
-  },[])
-
-  const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: '',
-      occupation: '',
-      state: '',
-      });
-
+  const [success, setSuccess] = useState()
+  const [occupationList, setOccupationList] = useState([])
+  const [stateList, setStateList] = useState([])
   const [formIsValid, setFormIsValid] = useState(true)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    occupation: '',
+    state: '',
+  });
+
+  useEffect(() => {
+    fetch("https://frontend-take-home.fetchrewards.com/form")
+    .then(response => response.json())
+    .then(data => {
+      setStateList(data.states)
+      setOccupationList(data.occupations)
+
+      setFormData({
+        ...formData,
+        occupation: data.occupations[0],
+        state: data.states[0].name
+      });
+    })
+  },[])
 
   const handleChange = (event) => {
     setFormData({
@@ -38,56 +39,40 @@ function UserCreationForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (validateForm()) {
-        // submit formData to server
-        setFormIsValid(true)
-        console.log("Success!", formData)
-        fetch('https://httpbin.org/post', { 
+      setFormIsValid(true)
+      console.log("Success!", formData)
 
-          method: 'POST', 
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => setError(error));
-      } else {
-        setFormIsValid(false)
-        console.log('something is wrong', formData)
+      fetch('https://httpbin.org/post', {
+        method: 'POST', 
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (response.ok) setSuccess(true)
+      })
+      .catch(error => setSuccess(false));
+    } else {
+      setFormIsValid(false)
+      console.log('something is wrong', formData)
     }
   };
 
   const validateForm = () => {
     let isValid = true;
 
-    if (!formData.name) {
-      isValid = false;
-    }
-    if (!formData.email) {
-      isValid = false;
-    } 
-    if (!formData.password) {
-      isValid = false;
-    }
-    if (!formData.occupation) {
-      isValid = false;
-    }
-    if (!formData.state) {
-      isValid = false;
-    }
-
+    if (!formData.name) isValid = false;
+    if (!formData.email) isValid = false;
+    if (!formData.password) isValid = false;
+    if (!formData.occupation) isValid = false;
+    if (!formData.state) isValid = false;
+    
     return isValid
   };
 
-  const occupationList = ['Tech', 'Sales'];
-  const stateList = ['Alabama', 'Alaska', 'Arizona', 'Arkansas'];
-
   return (
     <>
-    <h3>Create user</h3>
+      <h1 className='register-form__title'>Create a user</h1>
       <form onSubmit={handleSubmit} className="register-form">
         <label className="register-form__label">
           Name
@@ -95,7 +80,6 @@ function UserCreationForm() {
         </label>
         <input
           type="text"
-          id="name"
           data-testid="name-input"
           name="name"
           value={formData.name}
@@ -109,7 +93,6 @@ function UserCreationForm() {
         </label>
         <input
           type="email"
-          id="email"
           data-testid="email-input"
           name="email"
           value={formData.email}
@@ -123,7 +106,6 @@ function UserCreationForm() {
         </label>
         <input
           type="password"
-          id="password"
           data-testid="password-input"
           name="password"
           value={formData.password}
@@ -136,8 +118,6 @@ function UserCreationForm() {
           <span title="Required" className="text-accent">*</span>
         </label>
         <select
-          id="occupation"
-          data-testid="occupation-input"
           name="occupation"
           value={formData.occupation}
           onChange={handleChange}
@@ -155,16 +135,14 @@ function UserCreationForm() {
           <span title="Required" className="text-accent">*</span>
         </label>
         <select
-          id="state"
-          data-testid="state-input"
           name="state"
           value={formData.state}
           onChange={handleChange}
           className="register-form__input"
         >
           {stateList.map((state) => (
-            <option key={state} value={state}>
-              {state}
+            <option key={state.name} value={state.name}>
+              {state.name}
             </option>
           ))}
         </select>
@@ -175,8 +153,16 @@ function UserCreationForm() {
         {!formIsValid && (
           <p className="register-form__error"><span title="Required" className="text-accent">*</span> indicates a required field</p>
         )}
-        <img alt="dog" src={dogImage} />
       </form>
+      {success ? (
+        <div className='register-form__success'>
+          Success! The form has been submitted
+        </div>
+      ) : (
+        <div className='register-form__error'>
+          There was an error submitting the form
+        </div>
+      )}
     </>
   );
 }

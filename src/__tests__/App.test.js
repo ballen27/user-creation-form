@@ -13,6 +13,6 @@ import App from '../App';
 
 test('renders user creation form', () => {
   render(<App />);
-  const userCreationForm = screen.getByText('Create user');
+  const userCreationForm = screen.getByText('Create a user');
   expect(userCreationForm).toBeInTheDocument();
 });
