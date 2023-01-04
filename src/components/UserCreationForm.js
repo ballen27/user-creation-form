@@ -43,7 +43,6 @@ function UserCreationForm() {
 
     if (validateForm()) {
       setFormIsValid(true)
-      console.log("Success!", formData)
 
       fetch('https://frontend-take-home.fetchrewards.com/form', {
         method: 'POST',
@@ -59,7 +58,6 @@ function UserCreationForm() {
       .catch(error => setError(error));
     } else {
       setFormIsValid(false)
-      console.log('something is wrong', formData)
     }
   };
 
