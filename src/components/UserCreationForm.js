@@ -3,6 +3,7 @@ import '../styles/form.css'
 
 function UserCreationForm() {
 
+  const [error, setError] = useState()
   const [success, setSuccess] = useState()
   const [occupationList, setOccupationList] = useState([])
   const [stateList, setStateList] = useState([])
@@ -44,14 +45,18 @@ function UserCreationForm() {
       setFormIsValid(true)
       console.log("Success!", formData)
 
-      fetch('https://httpbin.org/post', {
-        method: 'POST', 
+      fetch('https://frontend-take-home.fetchrewards.com/form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }, 
         body: JSON.stringify(formData)
       })
       .then(response => {
         if (response.ok) setSuccess(true)
+        return response.json()
       })
-      .catch(error => setSuccess(false));
+      .catch(error => setError(error));
     } else {
       setFormIsValid(false)
       console.log('something is wrong', formData)
@@ -154,12 +159,13 @@ function UserCreationForm() {
           <p className="register-form__error"><span title="Required" className="text-accent">*</span> indicates a required field</p>
         )}
       </form>
-      {success ? (
+      {success && (
         <div className='register-form__success'>
           Success! The form has been submitted
         </div>
-      ) : (
-        <div className='register-form__error'>
+      )}
+      { error && (
+        <div className='register-form__submit-error'>
           There was an error submitting the form
         </div>
       )}
