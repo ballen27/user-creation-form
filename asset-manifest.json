@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/user-creation-form/static/css/main.5a2009ed.css",
-    "main.js": "/user-creation-form/static/js/main.265fa0f9.js",
+    "main.js": "/user-creation-form/static/js/main.b55e3740.js",
     "index.html": "/user-creation-form/index.html",
     "main.5a2009ed.css.map": "/user-creation-form/static/css/main.5a2009ed.css.map",
-    "main.265fa0f9.js.map": "/user-creation-form/static/js/main.265fa0f9.js.map"
+    "main.b55e3740.js.map": "/user-creation-form/static/js/main.b55e3740.js.map"
   },
   "entrypoints": [
     "static/css/main.5a2009ed.css",
-    "static/js/main.265fa0f9.js"
+    "static/js/main.b55e3740.js"
   ]
 }
