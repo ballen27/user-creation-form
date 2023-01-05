@@ -1,77 +1,77 @@
 .register-form {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 50px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 80px;
-    background-color: rgb(39 28 71);
-  }
-  
-  .register-form__label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-  }
-  
-  .register-form__input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 18px;
-    padding: .5rem;
-  }
-  
-  .register-form__button {
-    width: 100%;
-    height: 40px;
-    background-color: rgb(242 86 80);
-    border: none;
-    border-radius: 5px;
-    color: rgb(39 28 71);
-    font-size: 18px;
-    cursor: pointer;
-  }
-  .disabled {
-    cursor: copy;
-  }
-  
-  .register-form__button:hover {
-    background-color: rgb(255 169 0);
-  }
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 50px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 80px;
+  background-color: rgb(39 28 71);
+}
 
-  .text-accent {
-    margin-left: 4px;
-    color:rgb(242 86 80)
-  }
+.register-form__label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
 
-  .register-form__error {
-    display: block;
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-  }
+.register-form__input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 0.5rem;
+}
 
-  .register-form__title {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-  }
+.register-form__button {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(242 86 80);
+  border: none;
+  border-radius: 5px;
+  color: rgb(39 28 71);
+  font-size: 18px;
+  cursor: pointer;
+}
+.disabled {
+  cursor: copy;
+}
 
-  .register-form__success {
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    font-size: large;
-    color: green;
-  }
+.register-form__button:hover {
+  background-color: rgb(255 169 0);
+}
 
-  .register-form__submit-error {
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    font-size: large;
-    color: red
-  }
+.text-accent {
+  margin-left: 4px;
+  color: rgb(242 86 80);
+}
+
+.register-form__error {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+
+.register-form__title {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.register-form__success {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: large;
+  color: green;
+}
+
+.register-form__submit-error {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: large;
+  color: red;
+}

@@ -1,36 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/form.css'
+import React, { useState, useEffect } from "react";
+import "../styles/form.css";
 
 function UserCreationForm() {
-
-  const [error, setError] = useState()
-  const [success, setSuccess] = useState()
-  const [occupationList, setOccupationList] = useState([])
-  const [stateList, setStateList] = useState([])
-  const [formIsValid, setFormIsValid] = useState(true)
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState();
+  const [occupationList, setOccupationList] = useState([]);
+  const [stateList, setStateList] = useState([]);
+  const [formIsValid, setFormIsValid] = useState(true);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    occupation: '',
-    state: '',
+    name: "",
+    email: "",
+    password: "",
+    occupation: "",
+    state: "",
   });
 
   useEffect(() => {
     fetch("https://frontend-take-home.fetchrewards.com/form")
-    .then(response => response.json())
-    .then(data => {
-      setStateList(data.states)
-      setOccupationList(data.occupations)
+      .then((response) => response.json())
+      .then((data) => {
+        setStateList(data.states);
+        setOccupationList(data.occupations);
 
-      setFormData({
-        ...formData,
-        occupation: data.occupations[0],
-        state: data.states[0].name
-      });
-    })
-    .catch(error => setError(error))
-  },[])
+        setFormData({
+          ...formData,
+          occupation: data.occupations[0],
+          state: data.states[0].name,
+        });
+      })
+      .catch((error) => setError(error));
+  }, []);
 
   const handleChange = (event) => {
     setFormData({
@@ -43,36 +42,44 @@ function UserCreationForm() {
     event.preventDefault();
 
     if (validateForm()) {
-      setFormIsValid(true)
+      setFormIsValid(true);
 
-      fetch('https://frontend-take-home.fetchrewards.com/form', {
-        method: 'POST',
+      fetch("https://frontend-take-home.fetchrewards.com/form", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(formData)
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       })
-      .then(response => {
-        if (response.ok) setSuccess(true)
-        return response.json()
-      })
-      .catch(error => setError(error));
+        .then((response) => {
+          if (response.ok) setSuccess(true);
+          return response.json();
+        })
+        .catch((error) => setError(error));
     } else {
-      setFormIsValid(false)
+      setFormIsValid(false);
     }
   };
 
   const validateForm = () => {
-    return formData.name && formData.email && formData.password && formData.occupation && formData.state;
+    return (
+      formData.name &&
+      formData.email &&
+      formData.password &&
+      formData.occupation &&
+      formData.state
+    );
   };
 
   return (
     <>
-      <h1 className='register-form__title'>Create a user</h1>
+      <h1 className="register-form__title">Create a user</h1>
       <form onSubmit={handleSubmit} className="register-form">
         <label className="register-form__label">
           Name
-          <span title="Required" className="text-accent">*</span>
+          <span title="Required" className="text-accent">
+            *
+          </span>
         </label>
         <input
           type="text"
@@ -85,7 +92,9 @@ function UserCreationForm() {
         <br />
         <label className="register-form__label">
           Email
-          <span title="Required" className="text-accent">*</span>
+          <span title="Required" className="text-accent">
+            *
+          </span>
         </label>
         <input
           type="email"
@@ -98,7 +107,9 @@ function UserCreationForm() {
         <br />
         <label className="register-form__label">
           Password
-          <span title="Required" className="text-accent">*</span>
+          <span title="Required" className="text-accent">
+            *
+          </span>
         </label>
         <input
           type="password"
@@ -111,7 +122,9 @@ function UserCreationForm() {
         <br />
         <label className="register-form__label">
           Occupation
-          <span title="Required" className="text-accent">*</span>
+          <span title="Required" className="text-accent">
+            *
+          </span>
         </label>
         <select
           name="occupation"
@@ -128,7 +141,9 @@ function UserCreationForm() {
         <br />
         <label className="register-form__label">
           State
-          <span title="Required" className="text-accent">*</span>
+          <span title="Required" className="text-accent">
+            *
+          </span>
         </label>
         <select
           name="state"
@@ -143,20 +158,25 @@ function UserCreationForm() {
           ))}
         </select>
         <br />
-        <button type="submit"  className={`register-form__button`}>
+        <button type="submit" className={`register-form__button`}>
           Submit
         </button>
         {!formIsValid && (
-          <p className="register-form__error"><span title="Required" className="text-accent">*</span> indicates a required field</p>
+          <p className="register-form__error">
+            <span title="Required" className="text-accent">
+              *
+            </span>{" "}
+            indicates a required field
+          </p>
         )}
       </form>
       {success && (
-        <div className='register-form__success'>
+        <div className="register-form__success">
           Success! The form has been submitted
         </div>
       )}
-      { error && (
-        <div className='register-form__submit-error'>
+      {error && (
+        <div className="register-form__submit-error">
           There was an error submitting the form
         </div>
       )}
@@ -166,10 +186,9 @@ function UserCreationForm() {
 
 export default UserCreationForm;
 
-
-/* Some Notes: 
-* 
-* Instead of the using the formIsValid value to display a message I could add the required attribute to each input
-* Better error handling on the fetch call with messages for the two api requests
-* Could include form input validation to check for valid email, pass first + last name etc.
-*/
+/* Some Notes:
+ *
+ * Instead of the using the formIsValid value to display a message I could add the required attribute to each input
+ * Better error handling on the fetch call with messages for the two api requests
+ * Could include form input validation to check for valid email, pass first + last name etc.
+ */
